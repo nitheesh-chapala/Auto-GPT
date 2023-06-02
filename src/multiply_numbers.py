@@ -1,0 +1,1 @@
+num1 = 5num2 = 10product = num1 * num2print(product)
