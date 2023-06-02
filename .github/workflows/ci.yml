@@ -256,7 +256,7 @@ jobs:
             https://api.github.com/repos/$REPO/issues/${{ github.event.pull_request.number }}/labels \
             -d '{"labels":["behaviour change"]}'
 
-            COMMENT_BODY="You changed AutoGPT's behaviour. The cassettes have been updated and will be merged to the submodule when this Pull Request gets merged."
+            COMMENT_BODY="You changed AutoGPT's behaviour. The cassettes have been updated and will be merged to the submodule when this Pull Request gets merged. "
           else
             echo "Removing label..."
             curl -X DELETE \
@@ -266,11 +266,7 @@ jobs:
           fi
 
           if [[ "${{ env.SCORE_CHANGED }}" == "true" ]]; then
-            if [ -z "$COMMENT_BODY" ]; then
-              COMMENT_BODY=$SCORE_CHANGED_MESSAGE
-            else
-              COMMENT_BODY="$COMMENT_BODY \n\n $SCORE_CHANGED_MESSAGE"
-            fi
+            COMMENT_BODY="$COMMENT_BODY$SCORE_CHANGED_MESSAGE"
           fi
 
           if [ ! -z "$COMMENT_BODY" ]; then
